@@ -1,0 +1,36 @@
+{
+  "name": "maxmilhas",
+  "version": "1.0.0",
+  "description": "technical challenge MaxMilhas",
+  "main": "service.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "cpf",
+    "maxmilhas",
+    "challenge",
+    "json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielgalleni/challenge-mm.git"
+  },
+  "author": "Daniel Galleni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielgalleni/challenge-mm/issues"
+  },
+  "homepage": "https://github.com/danielgalleni/challenge-mm#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "express-validator": "^4.3.0",
+    "mongoose": "^4.13.9",
+    "node-cpf": "^1.0.20",
+    "sequelize": "^4.31.2",
+    "sqlite3": "^3.1.13"
+  }
+}
