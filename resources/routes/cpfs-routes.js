@@ -16,4 +16,16 @@ router.route('/cpfs/:cpfId', controller)
     .put(controller.put)
     .delete(controller.delete);
 
+router.route('/cpfs/list/block', controller)
+    .get(controller.countBlackList);
+
+router.route('/cpfs/list/free', controller)
+    .get(controller.countFreeList);
+
+router.route('/cpfs/:cpf/block')
+    .put(controller.blockByCpf);
+
+router.route('/cpfs/:cpf/free')
+    .put(controller.freeByCpf);
+
 module.exports = router;

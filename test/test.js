@@ -4,20 +4,30 @@
 
 "use strict";
 
-const app = require('../service');
+const routes = require('../routes');
+const CpfsModel = require('../resources/models/cpfs-model');
+const Cpfs = require('../resources/controllers/cpfs-controller');
+let config = require('../config/global-setting');
 
-const request = require('supertest')(app);
+const request = require('supertest')(Cpfs);
+// const assert = require('assert');
 
-describe('Unit tests', () => {
-    it('should return 404 page', (done) => {
-        request
-            .get('/random-url')
-            .expect(404, done);
+describe('Unit tests for Cpfs', function() {
+    // beforeEach(function(done) {
+    //     Cpfs.delete({}, function(error) {
+    //         done();
+    //     });
+    // });
+
+    it('Should return 404 page', function(res) {
+        Cpfs.getAll(req, function(res) {
+            assert(404, res);
+        });
     });
 
-    it('should return home page', (done) => {
-        request
-            .get('/')
-            .expect(200, done);
+    it('Test the route', function(done) {
+        routes.get('/', function(done) {
+            assert(202, done);
+        });
     });
 });

@@ -140,6 +140,86 @@ class CpfsController {
 
         return res.status(204).send('Successfully deleted registration!');
     }
+
+    /**
+     * Count the occurrences of the cpfs blocked in the black list.
+     * Do no expose in endpoint. 
+     */
+    countBlackList(req, res) {
+        // Count the hits
+        config.TOTAL_HITS++;
+
+        CpfsModel.count({ where: {'blackList': "block" }}).then(blackList => {
+            return res.status(200).json({cpfAtBlackList: blackList});
+        });
+    }
+
+    /**
+     * Count the occurrences of the cpfs freed of the black list.
+     * Do no expose in endpoint. 
+     */
+    countFreeList(req, res) {
+        // Count the hits
+        config.TOTAL_HITS++;
+
+        CpfsModel.count({ where: {'blackList': "free" }}).then(freeList => {
+            return res.status(200).json({cpfAtWhiteList: freeList});
+        });
+    }
+
+    /**
+     * Add to black list by CPF
+     */
+    blockByCpf(req, res) {
+        // Count the hits
+        config.TOTAL_HITS++;
+
+        // Validate CPF
+        if (CPF.validate(req.params.cpf)) {
+
+            // If CPF is masked, remove the mask
+            if (CPF.isMasked(req.params.cpf))
+                req.params.cpf = CPF.unMask(req.params.cpf);
+
+            // Update to CPF blocked
+            CpfsModel.update(
+                        { blackList: "block" },
+                        { where: {cpf : req.params.cpf} }
+            ).then(registers => {
+                res.location('/cpfs/' + req.params.cpf);
+                return res.status(204).send('Successfully updated registration!');
+            });
+        }
+        else
+            return res.status(404).send('Bad Request: CPF not found!');
+    }
+
+        /**
+     * Add to free list by CPF
+     */
+    freeByCpf(req, res) {
+        // Count the hits
+        config.TOTAL_HITS++;
+
+        // Validate CPF
+        if (CPF.validate(req.params.cpf)) {
+
+            // If CPF is masked, remove the mask
+            if (CPF.isMasked(req.params.cpf))
+                req.params.cpf = CPF.unMask(req.params.cpf);
+
+            // Update to CPF blocked
+            CpfsModel.update(
+                        { blackList: "free" },
+                        { where: {cpf : req.params.cpf} }
+            ).then(registers => {
+                res.location('/cpfs/' + req.params.cpf);
+                return res.status(204).json('Successfully updated registration!');
+            });
+        }
+        else
+            return res.status(404).send('Bad Request: CPF not found!');
+    }
 };
 
 module.exports = new CpfsController();
