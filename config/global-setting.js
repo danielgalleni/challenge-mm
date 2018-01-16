@@ -10,5 +10,6 @@ const environment = process.env.MM_ENVIRONMENT;
 module.exports = {
     // Access port
     PORT: 3001,
-    TOTAL_HITS: 0
+    TOTAL_HITS: 0,
+    UPTIME: Date.now()
 };

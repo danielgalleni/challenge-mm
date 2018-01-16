@@ -11,4 +11,5 @@ const config = require('./config/global-setting');
 // Starting service
 app.listen(config.PORT, function(){
   console.log('Servidor rodando na porta ' + config.PORT);
+  app.emit('appStarted');
 });

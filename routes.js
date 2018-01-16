@@ -26,7 +26,19 @@ router.get('/Ping', function (req, res) {
 
 router.get('/Status', function (req, res) {
     config.TOTAL_HITS++;
-    res.status(200).json('Total requests: ' + config.TOTAL_HITS);
+    let status = {
+        TotalRequest: config.TOTAL_HITS,
+        upTime: Date.now() - config.UPTIME,
+        cpfAtBlackList: 0
+    };
+    res.status(200).json(status);
+});
+
+// catch 404 and forward to error handler
+router.use((req, res, next) => {
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 module.exports = router;
