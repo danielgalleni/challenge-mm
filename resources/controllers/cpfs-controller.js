@@ -121,13 +121,6 @@ class CpfsController {
             res.location('/cpfs/' + req.params.cpfId);
             return res.status(204).json('Successfully updated registration!');
         });
-        
-        /*success(function() {
-            res.location('/cpfs/' + id);
-            return res.status(204).send('Successfully updated registration!');
-        }).error(function(err) {
-            return res.status(500).send('Error on updated register!');
-        });*/
     }
 
     /**
@@ -194,7 +187,7 @@ class CpfsController {
             return res.status(404).send('Bad Request: CPF not found!');
     }
 
-        /**
+    /**
      * Add to free list by CPF
      */
     freeByCpf(req, res) {
@@ -219,6 +212,36 @@ class CpfsController {
         }
         else
             return res.status(404).send('Bad Request: CPF not found!');
+    }
+
+    /**
+     * 
+     */
+    statusCpf(req, res) {
+        // Count the hits
+        config.TOTAL_HITS++;
+
+        // Validate CPF
+        if (CPF.validate(req.params.cpf)) {
+
+            // If CPF is masked, remove the mask
+            if (CPF.isMasked(req.params.cpf))
+                req.params.cpf = CPF.unMask(req.params.cpf);
+
+            // Find register by CPF
+            CpfsModel.findOne({where: {cpf: req.params.cpf}}).then(registers => {
+                if (!registers)
+                    // Return 404 in case not found
+                    return res.status(404).send('No registers found!');
+                
+                // Insert the mask
+                registers.cpf = CPF.mask(registers.cpf);
+                // Returns the registers
+                return res.status(200).json({ statusCpf: registers.blackList, cpf: registers.cpf });
+            });
+        }
+        else
+            return res.status(404).send('Bad Request: CPF not found!');        
     }
 };
 

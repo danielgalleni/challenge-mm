@@ -28,4 +28,7 @@ router.route('/cpfs/:cpf/block')
 router.route('/cpfs/:cpf/free')
     .put(controller.freeByCpf);
 
+router.route('/status/:cpf')
+    .get(controller.statusCpf);
+
 module.exports = router;
