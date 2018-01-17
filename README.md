@@ -62,12 +62,34 @@ challenge-mm/
 
 ## Setup
 - Create/build the container `sudo docker build -t danielgalleni/challenge-mm .`
-- Execute this command`docker run -it -p 8080:3001 -d danielgalleni/challenge-mm`
+- Execute this command `docker run -it -p 8080:3001 -d danielgalleni/challenge-mm`
 
 ## Bugs and feature requests
 - To fix bugs and suggest improvements in the project, just fork the same and send a pull request. Your name and link to github will include in this README.
 
 ## Documentation
+- Routes the API
+
+# GET
+- /
+- /Ping
+- /Status
+- /cpfs
+- /cpfs/:cpfId
+- /cpfs/list/block
+- /cpfs/list/free
+- /status/:cpf
+
+# POST
+- /cpfs
+
+# PUT
+- /cpfs/:cpfId
+- /cpfs/:cpf/block
+- /cpfs/:cpf/free
+
+# DELETE
+- /cpfs/:cpfId
 
 ## Creators
 - [Daniel Galleni](https://github.com/danielgalleni/)
