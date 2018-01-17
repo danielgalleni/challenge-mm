@@ -1,5 +1,4 @@
 # challenge-mm
-technical challenge MaxMilhas
 
 <p align="center">
   <a href="https://www.maxmilhas.com.br/">
@@ -18,6 +17,7 @@ technical challenge MaxMilhas
 
 - [Quick start](#quick-start)
 - [Setup](#setup)
+- [Structure of the project](#structure-of-the-project)
 - [Bugs and feature requests](#bugs-and-feature-requests)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
@@ -32,9 +32,42 @@ Several quick start options are available:
 - Install with [npm](https://www.npmjs.com/): `npm install`
 - Install [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#os-requirements) following this link
 
+## Structure of the project
+
+Within the download you'll find the following directories and files, logically grouping common assets. You'll see something like this:
+
+```
+challenge-mm/
+├── config/
+│   ├── custom-express.js
+│   ├── global-setting.js
+└── resources/
+│   ├── controllers/
+│   |   ├── cpfs-controller.js
+|   ├── models/
+│   |   ├── cpfs-models.js
+|   ├── routes/
+│       ├── cpfs-routes.js
+└─── test
+|   ├── test.js
+├── .dockerignore
+├── .gitignore
+├── Dockerfile
+├── package-lock.json
+├── package.json
+├── README.me
+├── routes.js
+├── service.js
+```
+
 ## Setup
 - Create/build the container `sudo docker build -t danielgalleni/challenge-mm .`
 - Execute this command`docker run -it -p 8080:3001 -d danielgalleni/challenge-mm`
+
+## Bugs and feature requests
+- To fix bugs and suggest improvements in the project, just fork the same and send a pull request. Your name and link to github will include in this README.
+
+## Documentation
 
 ## Creators
 - [Daniel Galleni](https://github.com/danielgalleni/)
