@@ -18,4 +18,4 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-CMD pm2 start service.js && /bin/bash
+CMD mkdir data pm2 start service.js && /bin/bash
